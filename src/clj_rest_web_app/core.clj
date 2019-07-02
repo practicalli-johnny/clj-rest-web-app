@@ -1,4 +1,5 @@
-(ns clj-rest-web-app.core)
+(ns clj-rest-web-app.core
+  (:gen-class))
 
 (defn -main
   [& args]

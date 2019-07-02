@@ -2,5 +2,7 @@
 All notable changes to this project will be documented in this file. This change log follows the conventions of [keepachangelog.com](http://keepachangelog.com/).
 
 ## [Unreleased]
+### Added
+- Add support for Docker
 
 [Unreleased]: https://github.com/bakku/clj-rest-web-app/compare/5a1bf27...HEAD
