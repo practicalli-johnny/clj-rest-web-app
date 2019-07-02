@@ -9,7 +9,8 @@
                  [org.postgresql/postgresql "42.2.6"]
                  [ring/ring-jetty-adapter "1.7.1"]
                  [ring/ring-defaults "0.1.2"]
-                 [compojure "1.6.1"]]
+                 [compojure "1.6.1"]
+                 [hiccup "1.0.5"]]
   :aliases {"migrate"  ["run" "-m" "clj-rest-web-app.lein-tasks.migrations/migrate"]
             "rollback" ["run" "-m" "clj-rest-web-app.lein-tasks.migrations/rollback"]}
   :main ^:skip-aot clj-rest-web-app.core

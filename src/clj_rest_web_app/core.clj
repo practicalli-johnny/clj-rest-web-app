@@ -1,11 +1,12 @@
 (ns clj-rest-web-app.core
   (:require [compojure.core :refer :all]
             [ring.adapter.jetty :as ring]
-            [ring.middleware.defaults :refer [wrap-defaults site-defaults]])
+            [ring.middleware.defaults :refer [wrap-defaults site-defaults]]
+            [clj-rest-web-app.controllers.home :as home])
   (:gen-class))
 
 (defroutes app-routes
-  (GET "/" [] "<h1>Hello World</h1>"))
+  home/routes)
 
 (def application (wrap-defaults app-routes site-defaults))
 
