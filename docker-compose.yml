@@ -1,0 +1,18 @@
+version: '3'
+services:
+  app:
+    build: .
+    ports:
+      - "8080:8080"
+    environment:
+      DATABASE_URL: jdbc:postgresql://db/clj_rest_web_app?user=clj_rest_web_app&password=clj_rest_web_app&ssl=false
+    links:
+      - db
+    command: >
+      sh -c "lein migrate && java -jar app-standalone.jar"
+  db:
+    image: postgres:11.2-alpine
+    environment:
+      POSTGRES_USER: clj_rest_web_app
+      POSTGRES_PASSWORD: clj_rest_web_app
+      POSTGRES_DB: clj_rest_web_app

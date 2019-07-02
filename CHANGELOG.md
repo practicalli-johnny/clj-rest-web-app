@@ -4,5 +4,6 @@ All notable changes to this project will be documented in this file. This change
 ## [Unreleased]
 ### Added
 - Add support for Docker
+- Add database migration tooling
 
 [Unreleased]: https://github.com/bakku/clj-rest-web-app/compare/5a1bf27...HEAD
