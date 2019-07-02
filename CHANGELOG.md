@@ -3,4 +3,4 @@ All notable changes to this project will be documented in this file. This change
 
 ## [Unreleased]
 
-[Unreleased]: https://github.com/your-name/clj-rest-web-app/compare/0.1.1...HEAD
+[Unreleased]: https://github.com/bakku/clj-rest-web-app/compare/5a1bf27...HEAD
