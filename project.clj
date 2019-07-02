@@ -6,7 +6,10 @@
   :dependencies [[org.clojure/clojure "1.10.0"]
                  [ragtime "0.8.0"]
                  [org.clojure/java.jdbc "0.7.9"]
-                 [org.postgresql/postgresql "42.2.6"]]
+                 [org.postgresql/postgresql "42.2.6"]
+                 [ring/ring-jetty-adapter "1.7.1"]
+                 [ring/ring-defaults "0.1.2"]
+                 [compojure "1.6.1"]]
   :aliases {"migrate"  ["run" "-m" "clj-rest-web-app.lein-tasks.migrations/migrate"]
             "rollback" ["run" "-m" "clj-rest-web-app.lein-tasks.migrations/rollback"]}
   :main ^:skip-aot clj-rest-web-app.core
