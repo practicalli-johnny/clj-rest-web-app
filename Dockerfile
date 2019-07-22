@@ -8,6 +8,8 @@ RUN lein deps
 
 COPY . /usr/src/app
 
-RUN mv "$(lein uberjar | sed -n 's/^Created \(.*standalone\.jar\)/\1/p')" app-standalone.jar
+RUN mkdir -p build
 
-CMD ["java", "-jar", "app-standalone.jar"]
+RUN mv "$(lein uberjar | sed -n 's/^Created \(.*standalone\.jar\)/\1/p')" build/app-standalone.jar
+
+CMD ["java", "-jar", "build/app-standalone.jar"]
