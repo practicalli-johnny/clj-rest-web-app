@@ -3,8 +3,8 @@
             [clj-rest-web-app.views.home :as view]))
 
 (defn show
-  []
-  (view/show))
+  [flash]
+  (view/show flash))
 
 (defroutes routes
-  (GET "/" [] (show)))
+  (GET "/" [:as {flash :flash}] (show flash)))
