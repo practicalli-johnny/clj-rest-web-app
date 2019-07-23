@@ -1,7 +1,8 @@
 (ns clj-rest-web-app.models.core
-  (:require [clojure.java.jdbc :as sql]))
+  (:require [clojure.java.jdbc :as sql]
+            [environ.core :refer [env]]))
 
-(def db-url (System/getenv "DATABASE_URL"))
+(def db-url (env :database-url))
 
 (defn extract-query-args
   [query]

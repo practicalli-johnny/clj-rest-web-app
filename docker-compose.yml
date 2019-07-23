@@ -6,13 +6,14 @@ services:
       - "8080:8080"
       - "47480:47480"
     environment:
-      DATABASE_URL: jdbc:postgresql://db/clj_rest_web_app?user=clj_rest_web_app&password=clj_rest_web_app&ssl=false
       LEIN_REPL_HOST: "0.0.0.0"
       LEIN_REPL_PORT: 47480
     links:
       - db
     command: >
-      sh -c "lein migrate && java -jar build/app-standalone.jar"
+      sh -c "export DATABASE_URL='jdbc:postgresql://db/clj_rest_web_app_server?user=clj_rest_web_app&password=clj_rest_web_app&ssl=false' && \
+             lein migrate && \
+             java -jar build/app-standalone.jar"
     volumes:
       - .:/usr/src/app
       - build:/usr/src/app/build
@@ -21,6 +22,9 @@ services:
     environment:
       POSTGRES_USER: clj_rest_web_app
       POSTGRES_PASSWORD: clj_rest_web_app
-      POSTGRES_DB: clj_rest_web_app
+      REPL_DB: clj_rest_web_app_repl
+      SERVER_DB: clj_rest_web_app_server
+    volumes:
+      - ./resources/docker/create_db.sh:/docker-entrypoint-initdb.d/create_databases.sh
 volumes:
   build:
