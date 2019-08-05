@@ -19,12 +19,18 @@
   [flash]
   (view/login flash))
 
-(defn login
+(defn authenticate-user
   [email password]
   (let [user (user/find-one "email = ?" email)]
     (if (= (:password user) password)
       successful-login
       unsuccessful-login)))
+
+(defn login
+  [email password]
+  (if (and (some? email) (some? password))
+    (authenticate-user email password)
+    unsuccessful-login))
 
 (defroutes routes
   (GET "/login" [:as {flash :flash}] (login-form flash))
