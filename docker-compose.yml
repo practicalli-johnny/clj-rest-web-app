@@ -13,10 +13,9 @@ services:
     command: >
       sh -c "export DATABASE_URL='jdbc:postgresql://db/clj_rest_web_app_server?user=clj_rest_web_app&password=clj_rest_web_app&ssl=false' && \
              lein migrate && \
-             java -jar build/app-standalone.jar"
+             java -jar /usr/bin/app-standalone.jar"
     volumes:
       - .:/usr/src/app
-      - build:/usr/src/app/build
   db:
     image: postgres:11.2-alpine
     environment:
@@ -26,5 +25,3 @@ services:
       SERVER_DB: clj_rest_web_app_server
     volumes:
       - ./resources/docker/create_db.sh:/docker-entrypoint-initdb.d/create_databases.sh
-volumes:
-  build:
