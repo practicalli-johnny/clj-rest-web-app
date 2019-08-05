@@ -22,7 +22,7 @@
 (defn authenticate-user
   [email password]
   (let [user (user/find-one "email = ?" email)]
-    (if (= (:password user) password)
+    (if (user/valid-password? user password)
       successful-login
       unsuccessful-login)))
 
