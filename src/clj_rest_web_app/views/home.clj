@@ -1,5 +1,7 @@
 (ns clj-rest-web-app.views.home
-  (:require [clj-rest-web-app.views.layout :as layout]
+  (:require [hiccup.form :as form]
+            [ring.util.anti-forgery :as anti-forgery]
+            [clj-rest-web-app.views.layout :as layout]
             [clj-rest-web-app.models.user :as user]))
 
 (defn show
@@ -14,4 +16,9 @@
                  (list
                    [:a {:href "/login"} "Login"]
                    [:a {:href "/users/signup"} "Sign Up"])
-                 [:p "You are logged in as: " (:email user)])))
+                 (list
+                   [:p "You are logged in as: " (:email user)]
+                   [:br]
+                   (form/form-to [:post "/logout"]
+                                 (anti-forgery/anti-forgery-field)
+                                 (form/submit-button "Logout"))))))

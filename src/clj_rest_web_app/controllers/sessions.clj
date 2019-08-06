@@ -17,6 +17,13 @@
    :body ""
    :flash "Login failure"})
 
+(def successful-logout
+  {:status 302
+   :headers {"Location" "/"}
+   :body ""
+   :flash "Successfully logged out"
+   :session nil})
+
 (defn login-form
   [flash]
   (view/login flash))
@@ -36,4 +43,5 @@
 
 (defroutes routes
   (GET "/login" [:as {flash :flash}] (login-form flash))
-  (POST "/login" [email password] (login email password)))
+  (POST "/login" [email password] (login email password))
+  (POST "/logout" [] successful-logout))

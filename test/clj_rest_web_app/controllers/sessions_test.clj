@@ -34,3 +34,11 @@
       (is (= (routes request) unsuccessful-login))))
   (testing "should be unsuccessful without any credentials"
     (is (= (routes (mock/request :post "/login")) unsuccessful-login))))
+
+(deftest test-logout
+  (is (= (routes (mock/request :post "/logout"))
+         {:status 302
+          :headers {"Location" "/"}
+          :body ""
+          :flash "Successfully logged out"
+          :session nil})))
