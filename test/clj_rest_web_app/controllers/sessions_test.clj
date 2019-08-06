@@ -11,7 +11,9 @@
 
 (deftest test-login-form-should-render
   (let [request (assoc (mock/request :get "/login") :flash "Test Flash")]
-    (is (clojure.string/includes? (:body (routes request)) "<p style=\"color: red;\">Test Flash</p>"))))
+    (is (-> (routes request)
+            (:body)
+            (clojure.string/includes? "<p style=\"color: red;\">Test Flash</p>")))))
 
 (deftest test-login
   (sql/insert! db-url :users {:id 1 :email "test@test.com" :password (user/encrypt-password "12345")})
