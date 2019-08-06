@@ -7,6 +7,7 @@
             [ring.middleware.session.cookie :refer [cookie-store]]
             [ring.middleware.flash :refer [wrap-flash]]
             [environ.core :refer [env]]
+            [clj-rest-web-app.middleware.logger :refer [wrap-logger]]
             [clj-rest-web-app.controllers.home :as home]
             [clj-rest-web-app.controllers.sessions :as sessions]
             [clj-rest-web-app.controllers.users :as users])
@@ -26,7 +27,8 @@
                       (assoc :session session-defaults)))
 
 (def application (-> app-routes
-                     (wrap-defaults app-defaults)))
+                     (wrap-defaults app-defaults)
+                     (wrap-logger)))
 
 (defn start
   [port]
