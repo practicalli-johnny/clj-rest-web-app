@@ -7,6 +7,13 @@
 
 (use-fixtures :each fixtures/database-cleaner)
 
+(deftest test-valid-password
+  (let [user {:id 1 :email "test@mail.com" :password (encrypt-password "12345")}]
+    (testing "returns true for correct password"
+      (is (valid-password? user "12345")))
+    (testing "returns false for incorrect password"
+      (is (not (valid-password? user "123456"))))))
+
 (deftest test-row-count
   (sql/insert! db-url :users {:id 1 :email "test@mail.com" :password "12345"})
   (sql/insert! db-url :users {:id 2 :email "mail@test.com" :password "12345"})
@@ -37,9 +44,11 @@
     (let [user (find-one "email LIKE ?" "%@test%")]
       (is (= user {:id 2 :email "mail@test.com" :password "12345"})))))
 
-(deftest test-valid-password
-  (let [user {:id 1 :email "test@mail.com" :password (encrypt-password "12345")}]
-    (testing "returns true for correct password"
-      (is (valid-password? user "12345")))
-    (testing "returns false for incorrect password"
-      (is (not (valid-password? user "123456"))))))
+(deftest test-insert-one
+  (testing "should create a user and return it"
+    (let [returned-user (insert-one {:email "test@mail.com" :password "12345"})]
+      (is (= (:email returned-user) "test@mail.com"))
+      (is (= returned-user (first (sql/query db-url ["SELECT * FROM users"]))))))
+  (testing "should return false if user could not be created"
+    (let [returned-user (insert-one {:email "test@mail.com" :password "12345"})]
+      (is (= false returned-user)))))

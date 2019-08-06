@@ -48,3 +48,7 @@
        (sql/query db-url)
        first
        :count))
+
+(defn insert-one
+  [table record]
+  (sql/insert! db-url (keyword table) record))

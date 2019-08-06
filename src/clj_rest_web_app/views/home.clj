@@ -10,4 +10,5 @@
                  [:p {:style "color: red;"} flash])
                [:p "This project shows how to develop web apps using clojure"]
                [:p (str "Users in database: " (user/row-count))]
-               [:a {:href "/login"} "Login"]))
+               [:a {:href "/login"} "Login"]
+               [:a {:href "/users/signup"} "Sign Up"]))
