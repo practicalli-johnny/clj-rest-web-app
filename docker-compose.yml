@@ -12,6 +12,7 @@ services:
       - db
     command: >
       sh -c "export DATABASE_URL='jdbc:postgresql://db/clj_rest_web_app_server?user=clj_rest_web_app&password=clj_rest_web_app&ssl=false' && \
+             export APPLICATION_SECRET='3hPDlkV4fp2HDRoq' && \
              lein migrate && \
              java -jar /usr/bin/app-standalone.jar"
     volumes:

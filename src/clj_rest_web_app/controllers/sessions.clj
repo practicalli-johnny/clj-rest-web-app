@@ -3,11 +3,13 @@
             [clj-rest-web-app.views.sessions :as view]
             [clj-rest-web-app.models.user :as user]))
 
-(def successful-login
+(defn successful-login
+  [user]
   {:status 302
    :headers {"Location" "/"}
    :body ""
-   :flash "Successfully logged in"})
+   :flash "Successfully logged in"
+   :session {:user-id (:id user)}})
 
 (def unsuccessful-login
   {:status 302
@@ -23,7 +25,7 @@
   [email password]
   (let [user (user/find-one "email = ?" email)]
     (if (user/valid-password? user password)
-      successful-login
+      (successful-login user)
       unsuccessful-login)))
 
 (defn login

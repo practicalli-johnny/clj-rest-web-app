@@ -3,7 +3,10 @@
             [compojure.route :as route]
             [ring.adapter.jetty :as ring]
             [ring.middleware.defaults :refer [wrap-defaults site-defaults]]
+            [ring.middleware.session :refer [wrap-session]]
+            [ring.middleware.session.cookie :refer [cookie-store]]
             [ring.middleware.flash :refer [wrap-flash]]
+            [environ.core :refer [env]]
             [clj-rest-web-app.controllers.home :as home]
             [clj-rest-web-app.controllers.sessions :as sessions]
             [clj-rest-web-app.controllers.users :as users])
@@ -15,9 +18,15 @@
   users/routes
   route/not-found "Not Found")
 
+(def session-defaults (-> site-defaults
+                          (:session)
+                          (assoc :store (cookie-store {:key (env :application-secret)}))))
+
+(def app-defaults (-> site-defaults
+                      (assoc :session session-defaults)))
+
 (def application (-> app-routes
-                   (wrap-defaults site-defaults)
-                   (wrap-flash)))
+                     (wrap-defaults app-defaults)))
 
 (defn start
   [port]
@@ -26,5 +35,5 @@
 
 (defn -main
   []
-  (let [port (Integer. (or (System/getenv "PORT") "8080"))]
+  (let [port (Integer. (or (env :port) "8080"))]
     (start port)))
