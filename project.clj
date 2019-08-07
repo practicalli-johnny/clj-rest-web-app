@@ -15,9 +15,11 @@
                  [environ "1.1.0"]
                  [ragtime "0.8.0"]
                  [crypto-password "0.2.1"]]
-  :plugins [[lein-environ "1.1.0"]]
+  :plugins [[lein-environ "1.1.0"]
+            [lein-ring "0.12.5"]]
   :aliases {"migrate"  ["run" "-m" "clj-rest-web-app.lein-tasks.migrations/migrate"]
             "rollback" ["run" "-m" "clj-rest-web-app.lein-tasks.migrations/rollback"]}
   :main ^:skip-aot clj-rest-web-app.core
   :target-path "target/%s"
-  :profiles {:uberjar {:aot :all}})
+  :profiles {:uberjar {:aot :all}}
+  :ring {:handler clj-rest-web-app.core/application})

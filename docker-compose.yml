@@ -8,13 +8,14 @@ services:
     environment:
       LEIN_REPL_HOST: "0.0.0.0"
       LEIN_REPL_PORT: 47480
+      PORT: 8080
     links:
       - db
     command: >
       sh -c "export DATABASE_URL='jdbc:postgresql://db/clj_rest_web_app_server?user=clj_rest_web_app&password=clj_rest_web_app&ssl=false' && \
              export APPLICATION_SECRET='3hPDlkV4fp2HDRoq' && \
              lein migrate && \
-             lein run"
+             lein ring server"
     volumes:
       - .:/usr/src/app
   db:
