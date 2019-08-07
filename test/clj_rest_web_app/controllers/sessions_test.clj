@@ -13,7 +13,7 @@
   (let [request (assoc (mock/request :get "/login") :flash "Test Flash")]
     (is (-> (routes request)
             (:body)
-            (clojure.string/includes? "<p style=\"color: red;\">Test Flash</p>")))))
+            (clojure.string/includes? "<p class=\"alert\">Test Flash</p>")))))
 
 (deftest test-successul-login
   (testing "should set session"

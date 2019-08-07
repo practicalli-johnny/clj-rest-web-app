@@ -31,10 +31,10 @@
             (assoc :params {:email "test@mail.com" :password "12345"})
             (routes)
             (:body)
-            (clojure.string/includes? "<p style=\"color: red;\">Email is already taken</p>"))))
+            (clojure.string/includes? "<p class=\"alert\">Email is already taken</p>"))))
   (testing "should not be successful with empty inputs"
     (is (-> (mock/request :post "/users")
             (assoc :params {:email "test@mail.com" :password ""})
             (routes)
             (:body)
-            (clojure.string/includes? "<p style=\"color: red;\">User could not be created</p>")))))
+            (clojure.string/includes? "<p class=\"alert\">User could not be created</p>")))))
