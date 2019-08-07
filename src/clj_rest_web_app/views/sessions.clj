@@ -8,7 +8,7 @@
   (layout/page "Login"
                [:h1 "Login"]
                (if (some? flash)
-                 [:p {:style "color: red;"} flash])
+                 [:p {:class "alert"} flash])
                (form/form-to [:post "/login"]
                              (anti-forgery/anti-forgery-field)
                              (form/label "email" "Email")

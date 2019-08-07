@@ -1,0 +1,9 @@
+.alert {
+    color: red;
+}
+
+.divider {
+    display: inline;
+    margin-right: 5px;
+    margin-left: 5px;
+}

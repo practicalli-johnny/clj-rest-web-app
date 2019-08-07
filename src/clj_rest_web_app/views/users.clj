@@ -8,7 +8,7 @@
   (layout/page "Sign Up"
                [:h1 "Sign Up"]
                (if (some? error)
-                   [:p {:style "color: red;"} error])
+                   [:p {:class "alert"} error])
                (form/form-to [:post "/users"]
                              (anti-forgery/anti-forgery-field)
                              (form/label "email" "Email")

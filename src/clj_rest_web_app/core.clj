@@ -17,6 +17,7 @@
   home/routes
   sessions/routes
   users/routes
+  (route/resources "/")
   (route/not-found "<h1>Not Found</h1>"))
 
 (def session-defaults (-> site-defaults

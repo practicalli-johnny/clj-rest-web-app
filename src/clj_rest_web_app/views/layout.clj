@@ -6,6 +6,7 @@
   (h/html5
     [:head
       [:meta {:charset "utf-8"}]
-      [:title title]]
+      [:title title]
+      [:link {:rel "stylesheet" :href "/css/styles.css" :type "text/css"}]]
     [:body
       [:div {:id "content"} body]]))
